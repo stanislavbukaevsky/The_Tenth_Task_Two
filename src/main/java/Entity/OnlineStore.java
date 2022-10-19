@@ -1,13 +1,16 @@
 package Entity;
 
-import java.util.Objects;
+import org.springframework.web.context.annotation.SessionScope;
+
+import java.util.HashSet;
 import java.util.Set;
 
+@SessionScope
 public class OnlineStore {
     private Set<Integer> purchasesId;
 
-    public OnlineStore(Set<Integer> purchasesId) {
-        this.purchasesId = purchasesId;
+    public OnlineStore() {
+        this.purchasesId = new HashSet<>();
     }
 
     public Set<Integer> getPurchasesId() {
@@ -18,21 +21,9 @@ public class OnlineStore {
         this.purchasesId = purchasesId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OnlineStore that = (OnlineStore) o;
-        return purchasesId.equals(that.purchasesId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(purchasesId);
-    }
-
-    @Override
-    public String toString() {
-        return "Ваш товар:" + purchasesId;
+    public void addProducts(Set<Integer> purchasesId) {
+        for (Integer purchaseId : purchasesId) {
+            this.purchasesId.add(purchaseId);
+        }
     }
 }
